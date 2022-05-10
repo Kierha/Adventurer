@@ -6,14 +6,13 @@ import java.util.Scanner;
 
 public class readTextFile {
 
-
     public File chosenTextFile() {
         return new File("src/main/com.kierhann.adventurer/TextFiles/carte.txt");
     }
 
-    public int getDimension(File file) throws FileNotFoundException {
+    public int getDimension() throws FileNotFoundException {
         int linesCounter = 0;
-        Scanner scan = new Scanner(file);
+        Scanner scan = new Scanner(chosenTextFile());
 
         try {
             while (scan.hasNextLine()) {
@@ -25,13 +24,12 @@ public class readTextFile {
             System.out.println("File not found");
             e.printStackTrace();
         }
-
         return linesCounter;
     }
 
     public char[][] create2dArray() throws FileNotFoundException {
-        int Rows = getDimension(chosenTextFile());
-        int Columns = getDimension(chosenTextFile());
+        int Rows = getDimension();
+        int Columns = getDimension();
         char[][] map = new char[Rows][Columns];
         Scanner sc = new Scanner(chosenTextFile());
         char[] oneLineArray;
@@ -61,21 +59,10 @@ public class readTextFile {
         System.out.println("-------------------------------");
     }
 
-    public void addElement(char[][] map) {
-        for (int m = 0; m < map.length; m++) {
-            for (int n = 0; n < map.length; n++) {
-                if (m == 1 && n == 3) {
-                    map[m][n] = 'R';
-                }
-            }
-        }
-        printMap(map);
-    }
-
     public char[] toCharArray(String[] oneLine) {
         char[] charArray = new char[20];
-
         int i = 0;
+
         for (String str : oneLine) {
             for (char c : str.toCharArray()) {
                 charArray[i++] = c;
