@@ -28,9 +28,9 @@ public class readTextFile {
     }
 
     public char[][] create2dArray() throws FileNotFoundException {
-        int Rows = getDimension();
         int Columns = getDimension();
-        char[][] map = new char[Rows][Columns];
+        int Rows = getDimension();
+        char[][] map = new char[Columns][Rows];
         Scanner sc = new Scanner(chosenTextFile());
         char[] oneLineArray;
 
@@ -42,7 +42,7 @@ public class readTextFile {
                 String[] oneLine = sc.nextLine().split("");
                 oneLineArray = toCharArray(oneLine);
                 for (int j = 0; j < oneLineArray.length; j++) {
-                    map[i][j] = oneLineArray[j];
+                    map[j][i] = oneLineArray[j];
                 }
             }
         }
@@ -52,7 +52,7 @@ public class readTextFile {
     public void printMap(char[][] map) {
         for (int k = 0; k < map.length; k++) {
             for (int l = 0; l < map.length; l++) {
-                System.out.print(map[k][l] + " ");
+                System.out.print(map[l][k] + " ");
             }
             System.out.println();
         }
