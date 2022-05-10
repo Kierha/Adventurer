@@ -14,15 +14,18 @@ public class Main {
     static List<Character> inputs = Arrays.asList('N', 'S', 'E', 'O');
 
     public static void main(String[] args) throws FileNotFoundException {
+
+
         char[][] map = readFile.create2dArray();
-        System.out.println("This will be your playground, your character will be represented by @ on the map");
-        readFile.printMap(map);
-        System.out.println("Enter your x position where to start :");
-        int xPosition = input.nextInt();
-        System.out.println("Enter your y position where to start :");
-        int yPosition = input.nextInt();
-        adventure.startPosition(map, xPosition, yPosition);
-        manage.stepByStep(xPosition, yPosition, map);
+        manage.oneShot(9, 6, map);
+//        System.out.println("This will be your playground, your character will be represented by @ on the map");
+//        readFile.printMap(map);
+//        System.out.println("Enter your x position where to start :");
+//        int xPosition = input.nextInt();
+//        System.out.println("Enter your y position where to start :");
+//        int yPosition = input.nextInt();
+//        adventure.startPosition(map, xPosition, yPosition);
+//        manage.stepByStep(xPosition, yPosition, map);
 
         }
     }

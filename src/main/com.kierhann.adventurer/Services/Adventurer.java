@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Adventurer {
-    public static readTextFile textFile;
+    static readTextFile textFile = new readTextFile();
     char player = '@';
     int max;
     {
@@ -33,6 +33,10 @@ public class Adventurer {
     public boolean checkColision(char[][] map, int x, int y) throws FileNotFoundException {
         GameModeManager manage = new GameModeManager();
 
+        if (x < 0 || x > max || y < 0 || y > max) {
+            System.out.println("This is out of the map, I should take another way");
+            return false;
+        }
         if (map[x][y] == '#') {
             System.out.println("There is impenetrable woods, I should try something else");
             return false;
