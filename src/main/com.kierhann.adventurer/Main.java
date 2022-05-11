@@ -2,8 +2,6 @@ import Controller.GameModeManager;
 import Services.*;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,13 +9,14 @@ public class Main {
     static Adventurer adventure = new Adventurer();
     static GameModeManager manage = new GameModeManager();
     static Scanner input = new Scanner(System.in);
-    static List<Character> inputs = Arrays.asList('N', 'S', 'E', 'O');
 
     public static void main(String[] args) throws FileNotFoundException {
-
+        int xPosition = 9;
+        int yPosition = 6;
 
         char[][] map = readFile.create2dArray();
-        manage.oneShot(9, 6, map);
+        adventure.startPosition(map, xPosition, yPosition);
+        manage.oneShot(xPosition, yPosition, map);
 //        System.out.println("This will be your playground, your character will be represented by @ on the map");
 //        readFile.printMap(map);
 //        System.out.println("Enter your x position where to start :");
