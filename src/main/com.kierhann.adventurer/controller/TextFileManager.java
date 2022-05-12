@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 
 public class TextFileManager {
     final File mapTextFile = new File("src/main/com.kierhann.adventurer/textfiles/maps/carte.txt");
-    private Object Frame;
 
-//    Allow to select file by displaying a Windows window
+//    Allow to select a file by displaying a Windows window
     public File chosenTextFile() {
         FileDialog dialog = new FileDialog((Frame) null, "Select the file you wanna load...");
         dialog.setMode(FileDialog.LOAD);
@@ -44,23 +43,29 @@ public class TextFileManager {
     }
 
 //    Create the map into 2D array from the textFile
-    public char[][] create2dArray() throws FileNotFoundException {
+    public char[][] create2dArray() {
         int Columns = getSquareMapDimension();
         int Rows = getSquareMapDimension();
         char[][] map = new char[Columns][Rows];
-        Scanner sc = new Scanner(mapTextFile);
-        char[] oneLineArray;
 
-        while (sc.hasNextLine()) {
-            for (int i = 0; i < map.length; i++) {
-                String[] oneLine = sc.nextLine().split("");
-                oneLineArray = strArrToCharArr(oneLine);
-                for (int j = 0; j < oneLineArray.length; j++) {
-                    map[j][i] = oneLineArray[j];
+        try {
+            Scanner sc = new Scanner(mapTextFile);
+            char[] oneLineArray;
+
+            while (sc.hasNextLine()) {
+                for (int i = 0; i < map.length; i++) {
+                    String[] oneLine = sc.nextLine().split("");
+                    oneLineArray = strArrToCharArr(oneLine);
+                    for (int j = 0; j < oneLineArray.length; j++) {
+                        map[j][i] = oneLineArray[j];
+                    }
                 }
             }
+            System.out.println(Colors.getGreen() + "Map generated" + Colors.getGreen());
+        } catch (FileNotFoundException e) {
+            System.out.println(Colors.getRed() + "Impossible to load the text file" + Colors.getRed());
+            e.printStackTrace();
         }
-        System.out.println(Colors.getGreen() + "Map generated" + Colors.getGreen());
         return map;
     }
 
@@ -88,12 +93,10 @@ public class TextFileManager {
         return charArray;
     }
 
-//    Get the x and y position from the textfile
+//    Get the x and y position from the text file
     public int[] getCoordinatesFromTextFile(File textFilePath) {
         String[] splittedCoordinates = new String[0];
         int[] strCoordToInt = new int[0];
-
-//        String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
 
         try {
             List<String> linesFile = Files.lines(Paths.get(String.valueOf(textFilePath))).collect(Collectors.toList());
@@ -118,12 +121,11 @@ public class TextFileManager {
     return strCoordToInt;
     }
 
-// Get the adventurer path from the textfile
+// Get the adventurer path from the text file
     public String getPathFromTextFile(File textFilePath){
 
         String path = null;
         try {
-//            String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
 
             List<String> linesFile = Files.lines(Paths.get(String.valueOf(textFilePath))).collect(Collectors.toList());
             path = linesFile.get(1);

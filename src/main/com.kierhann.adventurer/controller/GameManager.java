@@ -20,7 +20,7 @@ public class GameManager {
             }
             if (map[x][y] == '#') {
                 System.out.println(Colors.getRed() + "Impossible to drop your adventurer here, there is impenetrable woods" + Colors.getRed());
-                reverseStartingCoordinates(x, y, map, path);
+                reverseStartingCoordinates(map ,x , y, path);
                 return false;
             }
             startPosition(map, x, y);
@@ -28,7 +28,7 @@ public class GameManager {
     }
 
 //    If checkStartingPosition is returning false because map[x][y] == '#', try to reverse coordinates to see if adventurer can spawn on empty cell
-    public void reverseStartingCoordinates(int x, int y, char[][] map, String path) {
+    public void reverseStartingCoordinates(char[][] map, int x, int y, String path) {
         String response;
         int xReversed = y;
         int yReversed = x;

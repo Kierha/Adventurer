@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Adventurer" />
+        <module name="AdventurerJava" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Adventurer" target="17" />
+      <module name="AdventurerJava" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
