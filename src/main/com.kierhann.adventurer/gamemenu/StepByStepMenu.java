@@ -9,12 +9,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class StepByStepMenu {
-    static TextFileManager manageMap = new TextFileManager();
-    static GameManager manageGame = new GameManager();
-    Scanner xUserInput = new Scanner(System.in);
-    Scanner yUserInput = new Scanner(System.in);
-    Scanner attempsInput = new Scanner(System.in);
-    Scanner pathUserInput = new Scanner(System.in);
+    static final TextFileManager manageMap = new TextFileManager();
+    static final GameManager manageGame = new GameManager();
+    final Scanner xUserInput = new Scanner(System.in);
+    final Scanner yUserInput = new Scanner(System.in);
+    final Scanner attempsInput = new Scanner(System.in);
+    final Scanner pathUserInput = new Scanner(System.in);
 
     int attempsCount;
     int x;

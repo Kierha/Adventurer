@@ -5,10 +5,10 @@ import utils.Colors;
 import java.util.Scanner;
 
 public class GameManager {
-    static TextFileManager manageMap = new TextFileManager();
-    Character player = '@';
-    Scanner userInput = new Scanner(System.in);
-    int maxSize = manageMap.getSquareMapDimension();
+    static final TextFileManager manageMap = new TextFileManager();
+    final Character player = '@';
+    final Scanner userInput = new Scanner(System.in);
+    final int maxSize = manageMap.getSquareMapDimension();
 
     public boolean checkStartingPosition(char[][] map, int x, int y, String path) {
 
@@ -54,41 +54,43 @@ public class GameManager {
     }
 
     public void movementManager(int x, int y, char[][] map, String path){
-//        TODO Verify player input
         for (int i = 0; i < path.length(); i++) {
-            char playerMovement = path.charAt(i);
-            switch(playerMovement) {
-                case 'N':
-                    if (checkColission(map, x, y - 1)) {
-                        map[x][y] = ' ';
-                        map[x][y-1] = player;
-                        y = y - 1;
-                    }
-                    break;
-                case 'S':
-                    if (checkColission(map, x, y + 1)) {
-                        map[x][y] = ' ';
-                        map[x][y+1] = player;
-                        y = y + 1;
-                    }
-                    break;
-                case 'E':
-                    if (checkColission(map, x + 1, y)) {
-                        map[x][y] = ' ';
-                        map[x+1][y] = player;
-                        x = x + 1;
+            if (path.charAt(i) == 'N' || path.charAt(i) == 'S' || path.charAt(i) == 'E' || path.charAt(i) == 'O') {
+                char playerMovement = path.charAt(i);
+                switch(playerMovement) {
+                    case 'N':
+                        if (checkColission(map, x, y - 1)) {
+                            map[x][y] = ' ';
+                            map[x][y-1] = player;
+                            y = y - 1;
+                        }
                         break;
-                    }
+                    case 'S':
+                        if (checkColission(map, x, y + 1)) {
+                            map[x][y] = ' ';
+                            map[x][y+1] = player;
+                            y = y + 1;
+                        }
+                        break;
+                    case 'E':
+                        if (checkColission(map, x + 1, y)) {
+                            map[x][y] = ' ';
+                            map[x+1][y] = player;
+                            x = x + 1;
+                            break;
+                        }
 
-                    break;
-                case 'O':
-                    if (checkColission(map, x-1, y)) {
-                        map[x][y] = ' ';
-                        map[x-1][y] = player;
-                        x = x - 1;
-                    }
-                    break;
+                        break;
+                    case 'O':
+                        if (checkColission(map, x-1, y)) {
+                            map[x][y] = ' ';
+                            map[x-1][y] = player;
+                            x = x - 1;
+                        }
+                        break;
+                }
             }
+            System.out.println(Colors.getRed() + "Only N - S - E - O inputs are making your adventurer move !" + Colors.getRed());
         }
         manageMap.printMap(map);
         System.out.println(Colors.getGreen() + "Last Position : x = " + x + " y = " + y + Colors.getGreen());

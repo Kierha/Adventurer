@@ -2,23 +2,28 @@ package controller;
 
 import utils.Colors;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class TextFileManager {
-    File mapTextFile = new File("src/main/com.kierhann.adventurer/textfiles/maps/carte.txt");
+    final File mapTextFile = new File("src/main/com.kierhann.adventurer/textfiles/maps/carte.txt");
+    private Object Frame;
 
 
-//    public File chosenTextFile() {
-//        return new File("src/main/com.kierhann.adventurer/TextFiles/carte.txt");
-//    }
+    public File chosenTextFile() {
+        FileDialog dialog = new FileDialog((Frame) null, "Select the file you wanna load...");
+        dialog.setMode(FileDialog.LOAD);
+        dialog.setVisible(true);
+        File[] file = dialog.getFiles();
+        return file[0];
+    }
 
     public int getSquareMapDimension() {
         int linesCounter = 0;
@@ -67,7 +72,7 @@ public class TextFileManager {
         System.out.println(Colors.getYellow() + "--------------------------------------------" + Colors.getYellow());
     }
 
-    public char[] strArrToCharArr(String[] oneLine) throws FileNotFoundException {
+    public char[] strArrToCharArr(String[] oneLine) {
         char[] charArray = new char[getSquareMapDimension()];
         int i = 0;
 
@@ -79,14 +84,14 @@ public class TextFileManager {
         return charArray;
     }
 
-    public int[] getCoordinatesFromTextFile() {
+    public int[] getCoordinatesFromTextFile(File textFilePath) {
         String[] splittedCoordinates = new String[0];
         int[] strCoordToInt = new int[0];
 
-        String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
+//        String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
 
         try {
-            List<String> linesFile = Files.lines(Paths.get(textFilePath)).collect(Collectors.toList());
+            List<String> linesFile = Files.lines(Paths.get(String.valueOf(textFilePath))).collect(Collectors.toList());
             String strCoordinates = linesFile.get(0);
             
             strCoordinates = strCoordinates.replace("\"", "");
@@ -108,13 +113,13 @@ public class TextFileManager {
     return strCoordToInt;
     }
 
-    public String getPathFromTextFile(){
+    public String getPathFromTextFile(File textFilePath){
 
         String path = null;
         try {
-            String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
+//            String textFilePath = "src/main/com.kierhann.adventurer/textFiles/locations/test.txt";
 
-            List<String> linesFile = Files.lines(Paths.get(textFilePath)).collect(Collectors.toList());
+            List<String> linesFile = Files.lines(Paths.get(String.valueOf(textFilePath))).collect(Collectors.toList());
             path = linesFile.get(1);
 
         } catch (IOException e) {

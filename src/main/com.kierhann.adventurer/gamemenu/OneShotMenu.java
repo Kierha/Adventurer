@@ -4,15 +4,16 @@ import controller.GameManager;
 import controller.TextFileManager;
 import utils.Colors;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class OneShotMenu {
-    static GameManager manageGame = new GameManager();
-    static TextFileManager manageMap = new TextFileManager();
-    Scanner xUserInput = new Scanner(System.in);
-    Scanner yUserInput = new Scanner(System.in);
-    Scanner pathUserInput = new Scanner(System.in);
+    static final GameManager manageGame = new GameManager();
+    static final TextFileManager manageMap = new TextFileManager();
+    final Scanner xUserInput = new Scanner(System.in);
+    final Scanner yUserInput = new Scanner(System.in);
+    final Scanner pathUserInput = new Scanner(System.in);
 
     int x;
     int y;
@@ -49,11 +50,12 @@ public class OneShotMenu {
             System.out.println(Colors.getPurple() + "This is the One Shot from text file mod");
             System.out.println("This will be your playground :" + Colors.getPurple());
             manageMap.printMap(map);
-
-            int[] strCoordToInt = manageMap.getCoordinatesFromTextFile();
+//            TODO Verify textFile data
+            File textFileData = manageMap.chosenTextFile();
+            int[] strCoordToInt = manageMap.getCoordinatesFromTextFile(textFileData);
             int x = strCoordToInt[0];
             int y = strCoordToInt[1];
-            path = manageMap.getPathFromTextFile();
+            path = manageMap.getPathFromTextFile(textFileData);
 
             if (manageGame.checkStartingPosition(map, x, y, path)){
                 System.out.println(Colors.getBlue() + "<-- Starting position -->" + Colors.getBlue());
