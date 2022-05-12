@@ -16,7 +16,7 @@ public class TextFileManager {
     final File mapTextFile = new File("src/main/com.kierhann.adventurer/textfiles/maps/carte.txt");
     private Object Frame;
 
-
+//    Allow to select file by displaying a Windows window
     public File chosenTextFile() {
         FileDialog dialog = new FileDialog((Frame) null, "Select the file you wanna load...");
         dialog.setMode(FileDialog.LOAD);
@@ -25,6 +25,7 @@ public class TextFileManager {
         return file[0];
     }
 
+//    Get the dimension of the map
     public int getSquareMapDimension() {
         int linesCounter = 0;
         try {
@@ -42,6 +43,7 @@ public class TextFileManager {
         return linesCounter;
     }
 
+//    Create the map into 2D array from the textFile
     public char[][] create2dArray() throws FileNotFoundException {
         int Columns = getSquareMapDimension();
         int Rows = getSquareMapDimension();
@@ -62,6 +64,7 @@ public class TextFileManager {
         return map;
     }
 
+//    Display the map
     public void printMap(char[][] map) {
         for (int k = 0; k < map.length; k++) {
             for (int l = 0; l < map.length; l++) {
@@ -72,6 +75,7 @@ public class TextFileManager {
         System.out.println(Colors.getYellow() + "--------------------------------------------" + Colors.getYellow());
     }
 
+//    Allow to convert a String array into a Char Array
     public char[] strArrToCharArr(String[] oneLine) {
         char[] charArray = new char[getSquareMapDimension()];
         int i = 0;
@@ -84,6 +88,7 @@ public class TextFileManager {
         return charArray;
     }
 
+//    Get the x and y position from the textfile
     public int[] getCoordinatesFromTextFile(File textFilePath) {
         String[] splittedCoordinates = new String[0];
         int[] strCoordToInt = new int[0];
@@ -113,6 +118,7 @@ public class TextFileManager {
     return strCoordToInt;
     }
 
+// Get the adventurer path from the textfile
     public String getPathFromTextFile(File textFilePath){
 
         String path = null;

@@ -10,6 +10,8 @@ public class GameManager {
     final Scanner userInput = new Scanner(System.in);
     final int maxSize = manageMap.getSquareMapDimension();
 
+
+//    Check the starting position looking for the x and y value. Prevent out of bound
     public boolean checkStartingPosition(char[][] map, int x, int y, String path) {
 
             if (x < 0 || x > maxSize || y < 0 || y > maxSize) {
@@ -25,6 +27,7 @@ public class GameManager {
             return true;
     }
 
+//    If checkStartingPosition is returning false because map[x][y] == '#', try to reverse coordinates to see if adventurer can spawn on empty cell
     public void reverseStartingCoordinates(int x, int y, char[][] map, String path) {
         String response;
         int xReversed = y;
@@ -49,10 +52,12 @@ public class GameManager {
         }
     }
 
+//    Make spawn the adventurer
     public void startPosition(char[][] map, int x, int y) {
         map[x][y] = player;
     }
 
+//    Handle every movement, by converting the String path input into char. Modify x or y value according to the direction taken
     public void movementManager(int x, int y, char[][] map, String path){
         for (int i = 0; i < path.length(); i++) {
             if (path.charAt(i) == 'N' || path.charAt(i) == 'S' || path.charAt(i) == 'E' || path.charAt(i) == 'O') {
@@ -89,14 +94,16 @@ public class GameManager {
                         }
                         break;
                 }
+            } else {
+                System.out.println(Colors.getRed() + "Only N - S - E - O inputs are making your adventurer move !" + Colors.getRed());
             }
-            System.out.println(Colors.getRed() + "Only N - S - E - O inputs are making your adventurer move !" + Colors.getRed());
         }
         manageMap.printMap(map);
         System.out.println(Colors.getGreen() + "Last Position : x = " + x + " y = " + y + Colors.getGreen());
         System.out.println(Colors.getYellow() + "--------------------------------------------" + Colors.getYellow());
     }
 
+//    Check if the adventurer go out of the map or is trying to reach a taken cell
     public boolean checkColission(char[][] map, int x, int y) {
         if (x < 0 || x > maxSize || y < 0 || y > maxSize) {
             System.out.println(Colors.getRed() + "This is out of the map, you lose one attempt for this fail !" + Colors.getRed());
